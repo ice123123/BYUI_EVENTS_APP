@@ -1,0 +1,152 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity" >
+
+    <item android:id="@+id/action_search"
+        android:icon="@drawable/ic_action_search"
+        android:title="@string/action_search"
+        android:showAsAction="ifRoom"
+        android:actionViewClass="android.widget.SearchView" />
+
+    <item android:id="@+id/action_filter"
+        android:title="@string/action_filter"
+        android:showAsAction="ifRoom|withText">
+
+        <menu>
+            <group android:checkableBehavior="all" android:id="@+id/filter_checkboxes">
+
+                <item android:id="@+id/filter_highlighted_events"
+                    android:title="@string/complete_activities"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_academic_soical"
+                    android:showAsAction="always|withText"
+                    android:title="@string/academicSocialEvent" />
+
+                <item android:id="@+id/filter_activities_outdoor"
+                    android:title="@string/activitiesOutdoor"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_activities_service"
+                    android:title="@string/activitiesService"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_activities_awarness"
+                    android:title="@string/activitiesAwarness"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_dept_music"
+                    android:title="@string/departmentMusic"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_employee_events"
+                    android:title="@string/employeeEvents"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_employee_training"
+                    android:title="@string/employeeTraining"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_forum"
+                    android:title="@string/forum"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_free_play"
+                    android:title="@string/freePlay"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_meeting"
+                    android:title="@string/meeting"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_presentations"
+                    android:title="@string/presentations"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_recital_faculty"
+                    android:title="@string/recitalFaculty"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_recital_student"
+                    android:title="@string/recitalStudent"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_student_assc"
+                    android:title="@string/studentAssociation"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_student_highlighted"
+                    android:title="@string/studentHighlighted"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_student_spirit"
+                    android:title="@string/studentSpirit"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_activities_life_skills"
+                    android:title="@string/activities_lifeSkills"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_activities_social"
+                    android:title="@string/activities_social"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_activities_sports"
+                    android:title="@string/activities_sports"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_activities_talent"
+                    android:title="@string/activities_talent"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_activities_wellness"
+                    android:title="@string/activities_wellness"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_alumni_or_reunion"
+                    android:title="@string/alumni_or_reunion"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_broadcast_conference"
+                    android:title="@string/broadcast_conference"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_concert"
+                    android:title="@string/concert"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_conference_workshop"
+                    android:title="@string/conference_workshop"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_devo_speeches"
+                    android:title="@string/devo_speeches"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_get_connected"
+                    android:title="@string/get_connected"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_graduation"
+                    android:title="@string/graduation"
+                    android:showAsAction="always|withText" />
+
+                <item android:id="@+id/filter_theatre"
+                    android:title="@string/theatre"
+                    android:showAsAction="always|withText" />
+
+            </group>
+
+            <item android:id="@+id/action_clear_filters"
+                android:title="@string/clearFilter"
+                android:showAsAction="always|withText" />
+
+        </menu>
+    </item>
+
+    <!--<item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:icon="@drawable/ic_action_settings"
+        android:showAsAction="ifRoom" />-->
+
+</menu>

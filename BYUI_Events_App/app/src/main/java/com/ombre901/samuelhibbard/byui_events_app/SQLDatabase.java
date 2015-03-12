@@ -35,7 +35,7 @@ import org.json.JSONObject;
 public class SQLDatabase {
     //  Database URL
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://71.209.33.122:3306/byui_events";
+    private static final String DB_URL = "jdbc:mysql://184.99.79.3:3306/byui_events";
     private static final String LINK_PHP = "http://157.201.194.254/~gshawm/JAVA/databaseSelect.php";
 
     //  Database credentials

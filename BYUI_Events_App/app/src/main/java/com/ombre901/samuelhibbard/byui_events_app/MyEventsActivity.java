@@ -1,9 +1,14 @@
 package com.ombre901.samuelhibbard.byui_events_app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,10 +20,15 @@ public class MyEventsActivity extends Activity implements ActivityObserver{
     /*
      * MEMBER VARIABLES
      */
-    private static ExpandableListViewAdapter listAdapter = null;
-    private static ExpandableListView expListView;
+    private static ListViewAdapter listAdapter = null;
+    private static ListView listView;
     private static TextView dateView;
     private Database database = Database.getInstance();
+    private Button deleteButton;
+    private List<String> headerList;
+    private Map<String, String> childList;
+    private List<byte[]> images;
+    private Map<String, String[]> dateList;
 
     /*
      * MEMBER METHODS
@@ -34,7 +44,7 @@ public class MyEventsActivity extends Activity implements ActivityObserver{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_events);
 
-        expListView = (ExpandableListView) findViewById(R.id.myEventsList);
+        listView = (ListView) findViewById(R.id.myEventsList);
         dateView = (TextView) findViewById(R.id.myEventsDate);
 
         setAdapter();
@@ -45,10 +55,10 @@ public class MyEventsActivity extends Activity implements ActivityObserver{
      */
     private void setAdapter() {
         //create the lists!
-        List<String> headerList = new ArrayList<String>();
-        Map<String, String> childList = new HashMap<String, String>();
-        List<byte[]> images = new ArrayList<byte[]>();
-        Map<String, String[]> dateList = new HashMap<String, String[]>();
+        headerList = new ArrayList<String>();
+        childList = new HashMap<String, String>();
+        images = new ArrayList<byte[]>();
+        dateList = new HashMap<String, String[]>();
 
         //now grab from the database!
         database.selectAllMy_Events(headerList, childList, images, dateList);
@@ -71,35 +81,13 @@ public class MyEventsActivity extends Activity implements ActivityObserver{
         //now to put it on the screen!
         if (listAdapter == null) {
             Log.d("My_Events: ", "create list adapter");
-            listAdapter = new ExpandableListViewAdapter(this, headerList, childList, images, dateList, "MYEVENTS", this);
+            listAdapter = new ListViewAdapter(this, headerList, childList, images, dateList, "MYEVENTS", this);
         } else {
             listAdapter.setLists(headerList, childList, images, dateList);
         }
 
         //now set it to the screen!
-        expListView.setAdapter(listAdapter);
-    }
-
-    /**
-     * ONSTART
-     *  This will start the activity!
-     */
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        //now create a listener for the list!
-        //this will only allow one thing to be selected!
-        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            int previousItem = -1;
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                if (previousItem != groupPosition) {
-                    expListView.collapseGroup(previousItem);
-                    previousItem = groupPosition;
-                }
-            }
-        });
+        listView.setAdapter(listAdapter);
     }
 
     /**
@@ -109,7 +97,26 @@ public class MyEventsActivity extends Activity implements ActivityObserver{
     protected void onResume() {
         super.onResume();
         //check to see if there are any new events saved!
+        //now create a listener for the list!
+        //this will only allow one thing to be selected!
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Activity eventActivity = new EventActivity(childList.get(headerList.get(position)));
+                Intent intent = new Intent(MyEventsActivity.this, EventActivity.class);
+                intent.putExtra("details", childList.get(headerList.get(position)));
+                intent.putExtra("date", dateList.get(headerList.get(position)));
+                intent.putExtra("title", headerList.get(position));
+                intent.putExtra("image",images.get(position));
+                intent.putExtra("activity","MyEvents");
+                MyEventsActivity.this.startActivity(intent);
+            }
+        });
+
+
         setAdapter();
+        update();
     }
 
     @Override

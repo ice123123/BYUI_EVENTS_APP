@@ -28,7 +28,8 @@
             android:layout_height="wrap_content"
             android:textSize="22sp"
             android:paddingBottom="15dp"
-            android:layout_gravity="center"
+            android:textAlignment="gravity"
+            android:gravity="center"
             android:layout_weight="1"
             android:background="@color/white" />
 
@@ -42,7 +43,7 @@
 
     </LinearLayout>
 
-    <ExpandableListView
+    <ListView
         android:id="@+id/week_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

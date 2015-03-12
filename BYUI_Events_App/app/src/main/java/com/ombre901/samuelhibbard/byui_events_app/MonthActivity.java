@@ -1,19 +1,21 @@
 package com.ombre901.samuelhibbard.byui_events_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-public class MonthActivity extends TemplateActivity implements ActivityObserver {
-    private static ExpandableListViewAdapter listAdapter;
-    private static ExpandableListView expListView;
+public class MonthActivity extends TemplateActivity implements ActivityObserver {    private static ListViewAdapter listAdapter;
+    private static ListView listView;
     private static TextView textView;
     private static Date date = new Date();
 
@@ -32,7 +34,7 @@ public class MonthActivity extends TemplateActivity implements ActivityObserver 
         setContentView(R.layout.activity_month);
 
         //create new list and textview!
-        expListView = (ExpandableListView) findViewById(R.id.monthList);
+        listView = (ListView) findViewById(R.id.monthList);
         textView = (TextView) findViewById(R.id.monthView);
 
         //now set the adapter!
@@ -57,16 +59,16 @@ public class MonthActivity extends TemplateActivity implements ActivityObserver 
     }
 
     @Override
-    protected void setUpExpandableListViewAdapter() {
+    protected void setUpListViewAdapter() {
         //now to put it on the screen!
         if (listAdapter == null) {
-            listAdapter = new ExpandableListViewAdapter(this, headerList, childList, imageList, dateList, "MONTH", null);
+            listAdapter = new ListViewAdapter(this, headerList, childList, imageList, dateList, "MONTH", null);
         } else {
             listAdapter.setLists(headerList, childList, imageList, dateList);
         }
 
         //now set it to the screen!
-        expListView.setAdapter(listAdapter);
+        listView.setAdapter(listAdapter);
     }
 
     /**
@@ -79,14 +81,18 @@ public class MonthActivity extends TemplateActivity implements ActivityObserver 
 
         //now create a listener for the list!
         //this will only allow one thing to be selected!
-        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            int previousItem = -1;
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
-            public void onGroupExpand(int groupPosition) {
-                if (previousItem != groupPosition) {
-                    expListView.collapseGroup(previousItem);
-                    previousItem = groupPosition;
-                }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Activity eventActivity = new EventActivity(childList.get(headerList.get(position)));
+                Intent intent = new Intent(MonthActivity.this, EventActivity.class);
+                intent.putExtra("details", childList.get(headerList.get(position)));
+                intent.putExtra("date", dateList.get(headerList.get(position)));
+                intent.putExtra("title", headerList.get(position));
+                intent.putExtra("image", imageList.get(position));
+                intent.putExtra("activity","Month");
+                MonthActivity.this.startActivity(intent);
             }
         });
 

@@ -1,10 +1,13 @@
 package com.ombre901.samuelhibbard.byui_events_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -12,8 +15,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class WeekActivity extends TemplateActivity implements ActivityObserver {
-    private static ExpandableListViewAdapter listAdapter;
-    private static ExpandableListView expListView;
+    private static ListViewAdapter listAdapter;
+    private static ListView listView;
     private static TextView textView;
     private static Date date = new Date();
     private String stringStartDate;
@@ -24,7 +27,7 @@ public class WeekActivity extends TemplateActivity implements ActivityObserver {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_week);
 
-        expListView = (ExpandableListView) findViewById(R.id.week_list);
+        listView = (ListView) findViewById(R.id.week_list);
         textView = (TextView) findViewById(R.id.week_view);
 
         setAdapter();
@@ -66,16 +69,16 @@ public class WeekActivity extends TemplateActivity implements ActivityObserver {
     }
 
     @Override
-    protected void setUpExpandableListViewAdapter() {
-        // Now to put it on the screen!
+    protected void setUpListViewAdapter() {
+        //now to put it on the screen!
         if (listAdapter == null) {
-            listAdapter = new ExpandableListViewAdapter(this, headerList, childList, imageList, dateList, "WEEK", null);
+            listAdapter = new ListViewAdapter(this, headerList, childList, imageList, dateList, "WEEK", null);
         } else {
             listAdapter.setLists(headerList, childList, imageList, dateList);
         }
 
-        // Now set it to the screen!
-        expListView.setAdapter(listAdapter);
+        //now set it to the screen!
+        listView.setAdapter(listAdapter);
     }
 
     /**
@@ -87,15 +90,18 @@ public class WeekActivity extends TemplateActivity implements ActivityObserver {
 
         //now create a listener for the list!
         //this will only allow one thing to be selected!
-        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-            int previousItem = -1;
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onGroupExpand(int groupPosition) {
-                if (previousItem != groupPosition) {
-                    expListView.collapseGroup(previousItem);
-                    previousItem = groupPosition;
-                }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Activity eventActivity = new EventActivity(childList.get(headerList.get(position)));
+                Intent intent = new Intent(WeekActivity.this, EventActivity.class);
+                intent.putExtra("details", childList.get(headerList.get(position)));
+                intent.putExtra("date", dateList.get(headerList.get(position)));
+                intent.putExtra("title", headerList.get(position));
+                intent.putExtra("image", imageList.get(position));
+                intent.putExtra("activity","Week");
+                WeekActivity.this.startActivity(intent);
             }
         });
 

@@ -51,5 +51,6 @@
     <string name="save">Save</string>
     <string name="back">Back</string>
     <string name="forward">Forward</string>
+   <string name="title_activity_event">Event Details</string>
 
 </resources>

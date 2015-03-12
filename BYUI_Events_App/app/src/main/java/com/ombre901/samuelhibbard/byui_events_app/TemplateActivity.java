@@ -34,7 +34,7 @@ public abstract class TemplateActivity extends Activity {
         setTitle();
 
         // Now put it on the screen
-        setUpExpandableListViewAdapter();
+        setUpListViewAdapter();
     }
 
     protected String dateFormat(String textDate) {
@@ -53,5 +53,5 @@ public abstract class TemplateActivity extends Activity {
 
     protected abstract void grabFromDatabase();
     protected abstract void setTitle();
-    protected abstract void setUpExpandableListViewAdapter();
+    protected abstract void setUpListViewAdapter();
 }

@@ -47,6 +47,11 @@
             android:name="com.ombre901.samuelhibbard.byui_events_app.MyEventsActivity"
             android:label="@string/title_activity_my_events" >
         </activity>
+        <activity
+            android:name="com.ombre901.samuelhibbard.byui_events_app.EventActivity"
+            android:label="@string/title_activity_event"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>
